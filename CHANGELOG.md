@@ -1,3 +1,7 @@
+# 2.0.1 / 2019-06/13
+
+- Added support for searches of any attribute
+
 # 2.0.0 / 2018-10-16
 
 ## BREAKING CHANGES

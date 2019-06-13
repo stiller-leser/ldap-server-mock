@@ -24,7 +24,7 @@
     "nopt": "4.0.1"
   },
   "devDependencies": {
-    "grunt": "1.0.1",
+    "grunt": "^1.0.4",
     "grunt-cli": "1.2.0",
     "grunt-eslint": "20.1.0",
     "pre-commit": "1.2.2"
