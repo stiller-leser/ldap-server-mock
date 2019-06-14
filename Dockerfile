@@ -11,7 +11,7 @@ RUN npm install
 COPY . .
 
 # Exposed port should be the same on ldap-server-mock-conf.json
-EXPOSE 3004
+EXPOSE 389
 
 CMD [ "npm", "start" ]
 
