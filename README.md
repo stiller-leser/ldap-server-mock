@@ -1,6 +1,6 @@
 # LDAP simple server mock
 
-Really simple basic mock for [LDAP server](https://tools.ietf.org/html/rfc4511). Use it to mock an LDAP server for authenticating applications. This should not be used in production environment, it is just for test purpose, nothing more.
+Really simple basic mock for [LDAP server](https://tools.ietf.org/html/rfc4511). Use it to mock an LDAP server and authenticate a user without further verifications, it simply searches for the user in the database and returns it. It does not implement LDAP SASL authentication. This should not be used in production environment, it is just for test purpose, nothing more.
 
 ## Install
 
@@ -59,7 +59,20 @@ Sample `Dockerfile` is provided. Just build and run your image with:
 
 ```docker run -p 3004:3004 -v ${path_of_json_conf}:/conf ldap-server-mock node server.js --conf=/conf/ldap-server-mock-conf.json --database=/conf/users.json```
 
-## Contributors
+## Test a connection to the LDAP server
+
+Here is an example using the ldapsearch client from OpenLDAP with the configuration above:
+
+    ldapsearch -x -H ldap://127.0.0.1:3004 -b "dc=test" "(&(objectclass=person)(cn=user-login))" attribute1 attribute2
+
+With:
+ - **-x** to deactivate authentication to the LDAP server
+ - **-H ldap://127.0.0.1:3004** the server URL
+ - **-b "dc=test"** the search base in LDAP directory, it should be the same as the **searchBase** property in server configuration above
+ - **"(&(objectclass=person)(cn=user-login))"** the search filter, it should be the same as the **searchFilter** property in server configuration with **{{username}}** replaced by the user login
+ - **attribute1, attribute2** the list of attributes you want to be returned
+
+# Contributors
 
 Maintainer: [Veo-Labs](http://www.veo-labs.com/)
 
